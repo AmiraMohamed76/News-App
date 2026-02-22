@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/theme/light_theme.dart';
+import 'package:news_app/features/onboarding/onboarding_screen.dart';
 import 'package:news_app/features/splash/splash_screen.dart';
 
 void main() {
@@ -13,11 +15,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        appBarTheme: AppBarTheme(),
-        primaryColor: Color(0xFFC53030),
-      ),
-      home: const SplashScreen(),
+      theme: lightTheme,
+      home: const OnboardingScreen(),
     );
   }
 }
