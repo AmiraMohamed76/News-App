@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/data_source/local_data/preferences_manager.dart';
 import 'package:news_app/core/theme/light_theme.dart';
-import 'package:news_app/features/onboarding/onboarding_screen.dart';
 import 'package:news_app/features/splash/splash_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await PreferencesManager().init();
+
+
   runApp(const MyApp());
 }
 
@@ -16,8 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: lightTheme,
-      home: const OnboardingScreen(),
+      home: const SplashScreen(),
     );
   }
 }
-

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/theme/light_color.dart';
 
 ThemeData lightTheme = ThemeData(
   useMaterial3: true,
@@ -13,7 +14,7 @@ ThemeData lightTheme = ThemeData(
   //   onSurface: Color(0xFF9E9E9E),
   // ),
   scaffoldBackgroundColor: Color(0xFFF5F5F5),
-  primaryColor: Color(0xFFC53030),
+  primaryColor: LightColor.primaryColor,
   // appBarTheme: AppBarTheme(
   //   backgroundColor: Color(0xFFFFFFFF),
   //   titleTextStyle: TextStyle(
@@ -53,7 +54,7 @@ ThemeData lightTheme = ThemeData(
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       foregroundColor: Color(0xFFFFFCFC),
-      backgroundColor: Color(0xFFC53030),
+      backgroundColor: LightColor.primaryColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.zero
       )
@@ -61,7 +62,7 @@ ThemeData lightTheme = ThemeData(
   ),
   textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        foregroundColor: Color(0xFFC53030),
+        foregroundColor: LightColor.primaryColor,
       ),
   ),
   // floatingActionButtonTheme: FloatingActionButtonThemeData(
@@ -151,24 +152,11 @@ ThemeData lightTheme = ThemeData(
   //   selectionHandleColor: Colors.grey,
   //   selectionColor: Colors.grey,
   // ),
-  //   bottomNavigationBarTheme: BottomNavigationBarThemeData(
-  //     backgroundColor: Color(0xFFF6F7F9),
-  //     type: BottomNavigationBarType.fixed,
-  //     unselectedItemColor: Color(0xFF3A4640),
-  //     selectedItemColor: Color(0xFF14A662),
-  //   ),
-  // popupMenuTheme: PopupMenuThemeData(
-  //   color: Color(0xFFF6F7F9),
-  //   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-  //   elevation: 2,
-  //   shadowColor: Colors.grey,
-  //   menuPadding: EdgeInsets.only(bottom: 0),
-  //   labelTextStyle: WidgetStateProperty.all(
-  //     TextStyle(
-  //       fontSize: 16,
-  //       fontWeight: FontWeight.w400,
-  //       color: Colors.black,
-  //     ),
-  //   ),
-  // ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: LightColor.backgroundColor,
+      type: BottomNavigationBarType.fixed,
+      unselectedItemColor: Color(0xFF363636),
+      selectedItemColor: LightColor.primaryColor,
+      showUnselectedLabels: true
+    ),
 );

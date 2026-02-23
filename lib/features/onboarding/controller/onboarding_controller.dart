@@ -1,22 +1,39 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:news_app/core/data_source/local_data/preferences_manager.dart';
+import 'package:news_app/features/auth/login_screen.dart';
 
-class OnboardingController extends ChangeNotifier{
+class OnboardingController extends ChangeNotifier {
   final PageController pageController = PageController();
 
   int currentIndex = 0;
   bool isLastPage = false;
 
-  void onPageChanged(int index){
+  void onPageChanged(int index) {
     currentIndex = index;
     index == 2 ? isLastPage = true : isLastPage = false;
     notifyListeners();
   }
 
-  void onNextPage(){
+  void onNextPage() {
     pageController.nextPage(
       duration: Duration(milliseconds: 300),
       curve: Curves.easeInOut,
     );
-     notifyListeners();
+    notifyListeners();
+  }
+
+  void onFinish(BuildContext context) async {
+    await PreferencesManager().setBool('onboarding_complete', true);
+    if(!context.mounted) return;
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext context) {
+          return LoginScreen();
+        },
+      ),
+    );
+    notifyListeners();
   }
 }

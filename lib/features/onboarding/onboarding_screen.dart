@@ -19,11 +19,15 @@ class OnboardingScreen extends StatelessWidget {
             actions: [
               Consumer<OnboardingController>(
                 builder:
-                    (BuildContext context, OnboardingController value, Widget? child) {
+                    (
+                      BuildContext context,
+                      OnboardingController value,
+                      Widget? child,
+                    ) {
                       return value.isLastPage
                           ? SizedBox()
                           : TextButton(
-                              onPressed: () {},
+                              onPressed: () => controller.onFinish(context),
                               child: Text(
                                 "Skip",
                                 style: TextStyle(fontSize: 16),
@@ -70,17 +74,15 @@ class OnboardingScreen extends StatelessWidget {
                               fontWeight: FontWeight.w400,
                             ),
                           ),
-
                         ],
                       );
                     },
                   ),
                 ),
-
                 SmoothPageIndicator(
                   controller: controller.pageController,
                   count: 3,
-                  effect: SwapEffect(dotWidth: 14.0, dotHeight: 14.0,),
+                  effect: SwapEffect(dotWidth: 14.0, dotHeight: 14.0),
                 ),
                 SizedBox(height: 45),
                 Consumer<OnboardingController>(
@@ -91,7 +93,13 @@ class OnboardingScreen extends StatelessWidget {
                         Widget? child,
                       ) {
                         return ElevatedButton(
-                          onPressed: () => controller.onNextPage(),
+                          onPressed: () {
+                            if (!value.isLastPage) {
+                              controller.onNextPage();
+                            } else {
+                              controller.onFinish(context);
+                            }
+                          },
                           style: ElevatedButton.styleFrom(
                             fixedSize: Size(
                               MediaQuery.of(context).size.width,

@@ -1,7 +1,61 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/data_source/local_data/preferences_manager.dart';
+import 'package:news_app/features/home/home_screen.dart';
+import 'package:news_app/features/auth/login_screen.dart';
+import 'package:news_app/features/onboarding/onboarding_screen.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    _navigateAfterSplash();
+    super.initState();
+  }
+
+  void _navigateAfterSplash() async {
+    await Future.delayed(Duration(seconds: 5));
+
+    final bool onboardingComplete =
+        PreferencesManager().getBool('onboarding_complete') ?? false;
+    final bool isLoggedIn =
+        PreferencesManager().getBool('is_logged_in') ?? false;
+
+    if (!mounted) return;
+    if (!onboardingComplete) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (BuildContext context) {
+            return OnboardingScreen();
+          },
+        ),
+      );
+    } else if (!isLoggedIn) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (BuildContext context) {
+            return LoginScreen();
+          },
+        ),
+      );
+    } else {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (BuildContext context) {
+            return HomeScreen();
+          },
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
