@@ -60,10 +60,15 @@ ThemeData lightTheme = ThemeData(
       )
     ),
   ),
+  progressIndicatorTheme: ProgressIndicatorThemeData(
+    color: Colors.black,
+    strokeWidth: 2,
+  ),
   textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         foregroundColor: LightColor.primaryColor,
       ),
+
   ),
   // floatingActionButtonTheme: FloatingActionButtonThemeData(
   //   backgroundColor: Color(0xFF14A662),
@@ -113,27 +118,27 @@ ThemeData lightTheme = ThemeData(
   //     overflow: TextOverflow.ellipsis,
   //   ),
   // ),
-  // inputDecorationTheme: InputDecorationTheme(
-  //   hintStyle: TextStyle(color: Color(0xFF9E9E9E)),
-  //   filled: true,
-  //   fillColor: Color(0xFFFFFFFF),
-  //   border: OutlineInputBorder(
-  //     borderRadius: BorderRadius.circular(16),
-  //     borderSide: BorderSide(color: Color(0xFFD1DAD6), width: 0.7),
-  //   ),
-  //   focusedBorder: OutlineInputBorder(
-  //     borderRadius: BorderRadius.circular(16),
-  //     borderSide: BorderSide(color: Color(0xFFD1DAD6), width: 0.7),
-  //   ),
-  //   enabledBorder: OutlineInputBorder(
-  //     borderRadius: BorderRadius.circular(16),
-  //     borderSide: BorderSide(color: Color(0xFFD1DAD6), width: 0.7),
-  //   ),
-  //   errorBorder: OutlineInputBorder(
-  //     borderRadius: BorderRadius.circular(16),
-  //     borderSide: BorderSide(color: Colors.red, width: 0.7),
-  //   ),
-  // ),
+  inputDecorationTheme: InputDecorationTheme(
+    hintStyle: TextStyle(color: Color(0xFF9E9E9E)),
+    filled: true,
+    fillColor: Color(0xFFFFFFFF),
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.zero,
+      borderSide: BorderSide(color: Color(0xFFD1DAD6), width: 0),
+    ),
+    focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.zero,
+      borderSide: BorderSide(color: Color(0xFFD1DAD6), width: 0),
+    ),
+    enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.zero,
+      borderSide: BorderSide(color: Color(0xFFD1DAD6), width: 0),
+    ),
+    errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.zero,
+      borderSide: BorderSide(color: LightColor.primaryColor, width: 0.7),
+    ),
+  ),
   // checkboxTheme: CheckboxThemeData(
   //   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
   //   side: BorderSide(color: Color(0xFFD1DAD6), width: 2),
@@ -159,4 +164,5 @@ ThemeData lightTheme = ThemeData(
       selectedItemColor: LightColor.primaryColor,
       showUnselectedLabels: true
     ),
+
 );

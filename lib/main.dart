@@ -7,7 +7,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await PreferencesManager().init();
 
-
+  // PreferencesManager().clear();
   runApp(const MyApp());
 }
 

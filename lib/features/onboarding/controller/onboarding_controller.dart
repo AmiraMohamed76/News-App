@@ -26,7 +26,7 @@ class OnboardingController extends ChangeNotifier {
   void onFinish(BuildContext context) async {
     await PreferencesManager().setBool('onboarding_complete', true);
     if(!context.mounted) return;
-    Navigator.push(
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (BuildContext context) {
