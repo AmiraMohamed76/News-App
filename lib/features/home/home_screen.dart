@@ -1,5 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:news_app/core/theme/light_color.dart';
+import 'package:news_app/features/home/components/categories_list.dart';
+import 'package:news_app/features/home/components/trending_news.dart';
+import 'package:news_app/features/home/components/view_all_component.dart';
 import 'package:news_app/features/home/home_controller.dart';
 import 'package:provider/provider.dart';
 
@@ -11,94 +15,132 @@ class HomeScreen extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (BuildContext context) => HomeController(),
       child: Consumer<HomeController>(
-        builder: (BuildContext context, HomeController value, Widget? child) {
-          return Scaffold(
-            body: value.errorMessage?.isNotEmpty ?? false
-                ? Center(child: Text(value.errorMessage!))
-                : value.topHeadLinesLoading
-                ? Center(child: CircularProgressIndicator())
-                : Column(
-                  children: [
-                    SizedBox(
-                      height: 330,
-                      child: Stack(
-                          children: [
-                            SizedBox(
-                              width: double.infinity,
-                              height: 240,
-                              child: Image.asset(
-                                'assets/images/home_background.png',
-                                fit: BoxFit.cover,
+        builder:
+            (BuildContext context, HomeController controller, Widget? child) {
+              return Scaffold(
+                body: CustomScrollView(
+                  slivers: [
+                    TrendingNews(),
+                    SliverToBoxAdapter(
+                      child: ViewAllComponent(
+                        title: "Categories",
+                        titleColor: Color(0xFF141414),
+                        onTap: () {},
+                      ),
+                    ),
+                    CategoriesList(),
+                    SliverList.builder(
+                      itemCount: 15,
+                      itemBuilder: (BuildContext context, int index) {
+                        final item = controller.newsTopHeadLinesList[index];
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0,
+                            vertical: 8,
+                          ),
+                          child: Row(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(12),
+                                child: Image.network(
+                                  width: 140,
+                                  height: 85,
+                                  item.urlToImage ?? "https://www.shutterstock.com/image-vector/picture-vector-icon-no-image-260nw-1732584287.jpg",
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Image.asset(
+                                      "assets/images/no_image_found.png",
+                                      width: 140,
+                                      height: 85,
+                                      fit: BoxFit.cover,
+                                    );
+                                  },
+                                ),
                               ),
-                            ),
-                            Positioned.fill(
-                              top: 40,
-                              child: Column(
-                                children: [
-                                  Text(
-                                    "NEWST",
-                                    style: TextStyle(
-                                      fontSize: 40,
-                                      fontWeight: FontWeight.w600,
-                                      color: LightColor.primaryColor,
+                              SizedBox(width: 8),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      item.title,
+                                      style: TextStyle(
+                                        color: Color(0xFF141414),
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 14,
+                                      ),
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
                                     ),
-                                  ),
-                                  SizedBox(height: 6),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    SizedBox(height: 4),
+                                    Row(
                                       children: [
-                                        Text(
-                                          "Trending News",
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w700,
-                                          ),
+                                        if(item.urlToImage ==null)  CircleAvatar(
+                                          backgroundImage: AssetImage('assets/images/no_image_found.png'),
+                                          radius: 10,
                                         ),
-                                        Text(
-                                          "View all",
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w400,
-                                            decoration: TextDecoration.underline,
-                                            decorationColor: Colors.white,
+                                        CircleAvatar(
+                                          backgroundImage: NetworkImage(
+                                            item.urlToImage!
+                                          ),
+                                          radius: 10,
+                                        ),
+                                        SizedBox(width: 4),
+                                        Expanded(
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                (item.author ?? "Not Found")
+                                                    .substring(0, min((item.author ??"Not Found").length, 10,),),
+                                                style: TextStyle(
+                                                  color: Color(0xFF141414),
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 12,
+                                                ),
+                                                maxLines: 1,
+                                              ),
+                                              Text(
+                                                formatDateTime(item.publishedAt),
+                                                style: TextStyle(
+                                                  color: Color(0xFF141414),
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ],
                                     ),
-                                  ),
-                                  SizedBox(height: 12),
-                                  SizedBox(
-                                    height: 140,
-                                    child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                        itemCount: 10 ,itemBuilder: (context, index){
-                                        return Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Container(
-                                            height: 140, width: 240,
-                                            color: Colors.red,
-                                          ),
-                                        );
-                                    }),
-                                  )
-
-
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-
-                          ],
-                        ),
+                            ],
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),
-          );
-        },
+              );
+            },
       ),
     );
+  }
+
+  String formatDateTime(String? date) {
+    if (date == null) return "";
+    final diff = DateTime.now().difference(DateTime.parse(date));
+
+    if (diff.inMinutes < 60) {
+      return '${diff.inMinutes}m ago';
+    }
+
+    if (diff.inHours < 24) {
+      return '${diff.inHours}h ago';
+    }
+    return '${diff.inDays}d ago';
   }
 }

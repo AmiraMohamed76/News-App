@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/core/data_source/local_data/preferences_manager.dart';
 import 'package:news_app/features/auth/login_screen.dart';

@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:news_app/core/data_source/local_data/preferences_manager.dart';
 import 'package:news_app/core/widgets/custom_button.dart';
 import 'package:news_app/core/widgets/custom_text_form_field.dart';
-import 'package:news_app/features/auth/login_screen.dart';
 import 'package:news_app/features/auth/widgets/password_validation_condition.dart';
-import 'package:news_app/features/home/home_screen.dart';
 import 'package:news_app/features/navigation/main_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -187,7 +185,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       CustomButton(
                         btnTitle: 'Sign Up',
                         onPressed: () {
-                          print("Button");
                           if (_formKey.currentState?.validate() ?? false) {
                             register();
                           }

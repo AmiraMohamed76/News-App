@@ -3,7 +3,6 @@ import 'package:news_app/core/data_source/local_data/preferences_manager.dart';
 import 'package:news_app/core/widgets/custom_button.dart';
 import 'package:news_app/core/widgets/custom_text_form_field.dart';
 import 'package:news_app/features/auth/register_screen.dart';
-import 'package:news_app/features/home/home_screen.dart';
 import 'package:news_app/features/navigation/main_screen.dart';
 
 class LoginScreen extends StatefulWidget {

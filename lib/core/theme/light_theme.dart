@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/core/theme/light_color.dart';
+import 'package:news_app/core/theme/light_colors.dart';
 
 ThemeData lightTheme = ThemeData(
   useMaterial3: true,
@@ -14,7 +14,7 @@ ThemeData lightTheme = ThemeData(
   //   onSurface: Color(0xFF9E9E9E),
   // ),
   scaffoldBackgroundColor: Color(0xFFF5F5F5),
-  primaryColor: LightColor.primaryColor,
+  primaryColor: LightColors.primaryColor,
   // appBarTheme: AppBarTheme(
   //   backgroundColor: Color(0xFFFFFFFF),
   //   titleTextStyle: TextStyle(
@@ -54,7 +54,7 @@ ThemeData lightTheme = ThemeData(
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       foregroundColor: Color(0xFFFFFCFC),
-      backgroundColor: LightColor.primaryColor,
+      backgroundColor: LightColors.primaryColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.zero
       )
@@ -66,7 +66,7 @@ ThemeData lightTheme = ThemeData(
   ),
   textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        foregroundColor: LightColor.primaryColor,
+        foregroundColor: LightColors.primaryColor,
       ),
 
   ),
@@ -136,7 +136,7 @@ ThemeData lightTheme = ThemeData(
     ),
     errorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.zero,
-      borderSide: BorderSide(color: LightColor.primaryColor, width: 0.7),
+      borderSide: BorderSide(color: LightColors.primaryColor, width: 0.7),
     ),
   ),
   // checkboxTheme: CheckboxThemeData(
@@ -158,10 +158,10 @@ ThemeData lightTheme = ThemeData(
   //   selectionColor: Colors.grey,
   // ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: LightColor.backgroundColor,
+      backgroundColor: LightColors.backgroundColor,
       type: BottomNavigationBarType.fixed,
       unselectedItemColor: Color(0xFF363636),
-      selectedItemColor: LightColor.primaryColor,
+      selectedItemColor: LightColors.primaryColor,
       showUnselectedLabels: true
     ),
 
