@@ -6,8 +6,8 @@ import 'package:news_app/features/home/models/news_article_model.dart';
 
 class HomeController extends ChangeNotifier {
   HomeController(){
-    callTopHeadLines();
-    callEverything();
+    getTopHeadLines();
+    getEverything();
   }
 
   List<NewsArticleModel> newsTopHeadLinesList = [];
@@ -15,13 +15,16 @@ class HomeController extends ChangeNotifier {
   ApiService apiService = ApiService();
 
   RequestStatusEnum everythingStatus = RequestStatusEnum.loading;
+  RequestStatusEnum topHeadlineStatus = RequestStatusEnum.loading;
 
-  bool topHeadLinesLoading = true;
   String? errorMessage;
   String? selectedCategory;
 
-  callTopHeadLines({String? category}) async {
+  getTopHeadLines({String? category}) async {
     try {
+      topHeadlineStatus = RequestStatusEnum.loading;
+      notifyListeners();
+
       Map<String, dynamic> result = await apiService.get(
         ApiConfig.topHeadlines,
         params: {'country': 'us',
@@ -31,17 +34,17 @@ class HomeController extends ChangeNotifier {
       newsTopHeadLinesList = (result['articles'] as List)
           .map((e) => NewsArticleModel.fromJson(e))
           .toList();
-      topHeadLinesLoading = false;
+      topHeadlineStatus = RequestStatusEnum.loaded;
       errorMessage = null;
     } catch (e) {
-      topHeadLinesLoading = false;
+      topHeadlineStatus = RequestStatusEnum.error;
       errorMessage = e.toString();
     }
 
     notifyListeners();
   }
 
-  callEverything() async {
+  getEverything() async {
     try {
       Map<String, dynamic> result = await apiService.get(
         ApiConfig.everything,
@@ -64,7 +67,7 @@ class HomeController extends ChangeNotifier {
 
   void updateCategories(String category){
     selectedCategory = category;
-    callTopHeadLines(category: selectedCategory);
+    getTopHeadLines(category: selectedCategory);
     notifyListeners();
   }
 }

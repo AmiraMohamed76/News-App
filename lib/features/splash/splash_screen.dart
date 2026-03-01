@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/core/data_source/local_data/preferences_manager.dart';
-import 'package:news_app/features/home/home_screen.dart';
 import 'package:news_app/features/auth/login_screen.dart';
+import 'package:news_app/features/navigation/main_screen.dart';
 import 'package:news_app/features/onboarding/onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -50,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
         context,
         MaterialPageRoute(
           builder: (BuildContext context) {
-            return HomeScreen();
+            return MainScreen();
           },
         ),
       );

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/core/enums/request_status_enum.dart';
+import 'package:news_app/core/extensions/date_time_extension.dart';
 import 'package:news_app/core/theme/light_colors.dart';
+import 'package:news_app/core/widgets/custom_cached_network_image.dart';
+import 'package:news_app/features/home/components/trending_news_shimmer.dart';
 import 'package:news_app/features/home/components/view_all_component.dart';
 import 'package:news_app/features/home/home_controller.dart';
 import 'package:provider/provider.dart';
@@ -36,24 +39,16 @@ class TrendingNews extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 6),
-                  ViewAllComponent(title: "Trending News", onTap: (){},),
+                  ViewAllComponent(title: "Trending News", onTap: () {}),
                   SizedBox(height: 12),
                   SizedBox(
                     height: 140,
                     child: Consumer<HomeController>(
                       builder:
-                          (
-                            BuildContext context,
-                            HomeController controller,
-                            Widget? child,
-                          ) {
+                          (BuildContext context, HomeController controller, Widget? child) {
                             switch (controller.everythingStatus) {
                               case RequestStatusEnum.loading:
-                                return Center(
-                                  child: CircularProgressIndicator(
-                                    color: Colors.white,
-                                  ),
-                                );
+                                return TrendingNewsShimmer();
                               case RequestStatusEnum.error:
                                 return Center(
                                   child: Text(controller.errorMessage!),
@@ -82,13 +77,11 @@ class TrendingNews extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(12),
                                         child: Stack(
                                           children: [
-                                            if (item.urlToImage != null)
-                                              Image.network(
-                                                width: 260,
-                                                height: 140,
-                                                item.urlToImage!,
-                                                fit: BoxFit.cover,
-                                              ),
+                                            CustomCachedNetworkImage(
+                                              imagePath: item.urlToImage ?? "",
+                                              width: 260,
+                                              height: 140,
+                                            ),
                                             Positioned.fill(
                                               child: Container(
                                                 decoration: BoxDecoration(
@@ -121,7 +114,8 @@ class TrendingNews extends StatelessWidget {
                                                     item.title,
                                                     style: TextStyle(
                                                       color: Color(0xFFFFFCFC),
-                                                      fontWeight: FontWeight.w700,
+                                                      fontWeight:
+                                                          FontWeight.w700,
                                                       fontSize: 14,
                                                     ),
                                                     maxLines: 2,
@@ -163,9 +157,8 @@ class TrendingNews extends StatelessWidget {
                                                         ),
                                                       ),
                                                       Text(
-                                                        formatDateTime(
-                                                          item.publishedAt,
-                                                        ),
+                                                        item.publishedAt
+                                                            .formatDateTime(),
                                                         style: TextStyle(
                                                           color: Color(
                                                             0xFFFFFCFC,
@@ -197,20 +190,5 @@ class TrendingNews extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  /// ToDo: Refactor
-  String formatDateTime(String? date) {
-    if (date == null) return "";
-    final diff = DateTime.now().difference(DateTime.parse(date));
-
-    if (diff.inMinutes < 60) {
-      return '${diff.inMinutes}m ago';
-    }
-
-    if (diff.inHours < 24) {
-      return '${diff.inHours}h ago';
-    }
-    return '${diff.inDays}d ago';
   }
 }

@@ -4,27 +4,26 @@ import 'package:news_app/core/theme/light_colors.dart';
 ThemeData lightTheme = ThemeData(
   useMaterial3: true,
   brightness: Brightness.light,
-  // colorScheme: ColorScheme.light(
+  colorScheme: ColorScheme.light(
   //   primaryContainer: Color(0xFFFFFFFF),
   //   primary: Color(0xFFD1DAD6),
   //   onPrimary: Color(0xFFD1DAD6),
-  //   secondary: Color(0xFF161F1B),
+    secondary: Color(0xFF363636),
   //   onSecondary: Color(0xFF14A662),
   //   surface: Color(0xFF3A4640),
   //   onSurface: Color(0xFF9E9E9E),
-  // ),
+  ),
   scaffoldBackgroundColor: Color(0xFFF5F5F5),
   primaryColor: LightColors.primaryColor,
-  // appBarTheme: AppBarTheme(
-  //   backgroundColor: Color(0xFFFFFFFF),
-  //   titleTextStyle: TextStyle(
-  //     fontWeight: FontWeight.w400,
-  //     fontSize: 20,
-  //     color: Color(0xFF161F1B),
-  //   ),
-  //   iconTheme: IconThemeData(color: Color(0xFF161F1B)),
-  //   centerTitle: true,
-  // ),
+  appBarTheme: AppBarTheme(
+    backgroundColor: Color(0xFFFFFFFF),
+    titleTextStyle: TextStyle(
+      fontWeight: FontWeight.w700,
+      fontSize: 16,
+      color: Color(0xFF141414),
+    ),
+    centerTitle: true,
+  ),
   // switchTheme: SwitchThemeData(
   //   trackColor: WidgetStateProperty.resolveWith((states) {
   //     if (states.contains(WidgetState.selected)) {
