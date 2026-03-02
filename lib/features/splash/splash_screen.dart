@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/constants/storage_key.dart';
 import 'package:news_app/core/data_source/local_data/preferences_manager.dart';
 import 'package:news_app/features/auth/login_screen.dart';
 import 'package:news_app/features/navigation/main_screen.dart';
@@ -22,9 +23,9 @@ class _SplashScreenState extends State<SplashScreen> {
     await Future.delayed(Duration(seconds: 5));
 
     final bool onboardingComplete =
-        PreferencesManager().getBool('onboarding_complete') ?? false;
+        PreferencesManager().getBool(StorageKey.onboardingComplete) ?? false;
     final bool isLoggedIn =
-        PreferencesManager().getBool('is_logged_in') ?? false;
+        PreferencesManager().getBool(StorageKey.isLoggedIn) ?? false;
 
     if (!mounted) return;
     if (!onboardingComplete) {

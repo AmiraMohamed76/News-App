@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/constants/app_sizes.dart';
 import 'package:news_app/features/onboarding/controller/onboarding_controller.dart';
 import 'package:news_app/features/onboarding/models/onboarding_item.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +31,7 @@ class OnboardingScreen extends StatelessWidget {
                               onPressed: () => controller.onFinish(context),
                               child: Text(
                                 "Skip",
-                                style: TextStyle(fontSize: 16),
+                                style: Theme.of(context).textTheme.titleSmall,
                               ),
                             );
                     },
@@ -38,7 +39,7 @@ class OnboardingScreen extends StatelessWidget {
             ],
           ),
           body: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(AppSizes.pw16),
             child: Column(
               children: [
                 Expanded(
@@ -55,24 +56,16 @@ class OnboardingScreen extends StatelessWidget {
                             OnboardingModel.onboardingList[index].imagePath,
                             height: MediaQuery.of(context).size.height * 0.42,
                           ),
-                          SizedBox(height: 24),
+                          SizedBox(height: AppSizes.ph24),
                           Text(
                             OnboardingModel.onboardingList[index].title,
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Color(0xFF4E4B66),
-                              fontWeight: FontWeight.w700,
-                            ),
+                            style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Color(0xFF4E4B66)),
                           ),
-                          SizedBox(height: 12),
+                          SizedBox(height: AppSizes.ph12),
                           Text(
                             OnboardingModel.onboardingList[index].description,
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Color(0xFF6E7191),
-                              fontWeight: FontWeight.w400,
-                            ),
+                            style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Color(0xFF6E7191),)
                           ),
                         ],
                       );
@@ -82,9 +75,9 @@ class OnboardingScreen extends StatelessWidget {
                 SmoothPageIndicator(
                   controller: controller.pageController,
                   count: 3,
-                  effect: SwapEffect(dotWidth: 14.0, dotHeight: 14.0),
+                  effect: SwapEffect(dotWidth: AppSizes.w14, dotHeight: AppSizes.w14),
                 ),
-                SizedBox(height: 45),
+                SizedBox(height: AppSizes.ph45),
                 Consumer<OnboardingController>(
                   builder:
                       (
@@ -100,12 +93,6 @@ class OnboardingScreen extends StatelessWidget {
                               controller.onFinish(context);
                             }
                           },
-                          style: ElevatedButton.styleFrom(
-                            fixedSize: Size(
-                              MediaQuery.of(context).size.width,
-                              52,
-                            ),
-                          ),
                           child: Text(
                             value.isLastPage ? 'Get Started' : 'Next',
                           ),

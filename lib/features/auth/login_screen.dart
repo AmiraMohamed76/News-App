@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/constants/app_sizes.dart';
+import 'package:news_app/core/constants/storage_key.dart';
 import 'package:news_app/core/data_source/local_data/preferences_manager.dart';
 import 'package:news_app/core/widgets/custom_button.dart';
 import 'package:news_app/core/widgets/custom_text_form_field.dart';
@@ -31,8 +33,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
     await Future.delayed(Duration(seconds: 3));
 
-    final savedEmail = PreferencesManager().getString("user_email");
-    final savedPassword = PreferencesManager().getString("user_password");
+    final savedEmail = PreferencesManager().getString(StorageKey.userEmail);
+    final savedPassword = PreferencesManager().getString(StorageKey.userPassword);
 
     if (savedEmail == null || savedPassword == null) {
       setState(() {
@@ -53,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
       return;
     }
 
-    await PreferencesManager().setBool("is_logged_in", true);
+    await PreferencesManager().setBool(StorageKey.isLoggedIn, true);
 
     if (!mounted) return;
     Navigator.pushReplacement(
@@ -89,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: SingleChildScrollView(
               physics: BouncingScrollPhysics(),
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: EdgeInsets.all(AppSizes.pw16),
                 child: Form(
                   key: _formKey,
                   child: Column(
@@ -99,18 +101,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       Center(
                         child: Image.asset(
                           'assets/images/logo.png',
-                          height: 45,
+                          height: AppSizes.h45,
                         ),
                       ),
-                      SizedBox(height: 40),
+                      SizedBox(height: AppSizes.ph40),
                       Text(
                         "Welcome to Newts",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                        ),
+                        style: Theme.of(context).textTheme.titleMedium,
                       ),
-                      SizedBox(height: 16),
+                      SizedBox(height: AppSizes.ph16),
                       CustomTextFormField(
                         controller: emailController,
                         hintText: 'usama@gmail.com',
@@ -129,7 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           }
                         },
                       ),
-                      SizedBox(height: 12),
+                      SizedBox(height: AppSizes.ph12),
                       CustomTextFormField(
                         controller: passwordController,
                         hintText: '*************',
@@ -142,7 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         obscureText: true,
                       ),
-                      SizedBox(height: 12),
+                      SizedBox(height: AppSizes.ph12),
                       if (errorMessage != null)
                         Text(
                           errorMessage!,
@@ -150,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             color: Theme.of(context).primaryColor,
                           ),
                         ),
-                      SizedBox(height: 20),
+                      SizedBox(height: AppSizes.ph20),
                       CustomButton(
                         btnTitle: 'Sign In',
                         onPressed: () {
@@ -160,15 +159,15 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         isLoading: isLoading,
                       ),
-                      SizedBox(height: 24),
+                      SizedBox(height: AppSizes.ph24),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             'Don’t have an account ?',
-                            style: TextStyle(fontSize: 14),
+                            style: Theme.of(context).textTheme.labelMedium
                           ),
-                          SizedBox(width: 8),
+                          SizedBox(width: AppSizes.pw8),
                           GestureDetector(
                             onTap: () {
                               Navigator.push(
@@ -182,10 +181,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
                             child: Text(
                               'Sign Up',
-                              style: TextStyle(
-                                color: Theme.of(context).primaryColor,
-                                fontSize: 16,
-                              ),
+                              style: Theme.of(context).textTheme.titleSmall,
                             ),
                           ),
                         ],

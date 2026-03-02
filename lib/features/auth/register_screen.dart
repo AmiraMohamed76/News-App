@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/constants/app_sizes.dart';
+import 'package:news_app/core/constants/storage_key.dart';
 import 'package:news_app/core/data_source/local_data/preferences_manager.dart';
 import 'package:news_app/core/widgets/custom_button.dart';
 import 'package:news_app/core/widgets/custom_text_form_field.dart';
@@ -49,7 +51,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     await Future.delayed(Duration(seconds: 3));
 
-    final savedEmail = PreferencesManager().getString("user_email");
+    final savedEmail = PreferencesManager().getString(StorageKey.userEmail);
 
     if (savedEmail != null && savedEmail == emailController.text.trim()) {
       setState(() {
@@ -62,14 +64,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
         emailController.text.trim(),
       );
       await PreferencesManager().setString(
-        "user_password",
+        StorageKey.userPassword,
         passwordController.text.trim(),
       );
-      await PreferencesManager().setBool("is_logged_in", true);
+      await PreferencesManager().setBool(StorageKey.isLoggedIn, true);
       setState(() {
         isLoading = false;
       });
-      if(!mounted) return;
+      if (!mounted) return;
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -97,7 +99,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           child: Center(
             child: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: EdgeInsets.all(AppSizes.pw16),
                 child: Form(
                   key: _formKey,
                   child: Column(
@@ -107,18 +109,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Center(
                         child: Image.asset(
                           'assets/images/logo.png',
-                          height: 45,
+                          height: AppSizes.h45,
                         ),
                       ),
-                      SizedBox(height: 40),
+                      SizedBox(height: AppSizes.ph40),
                       Text(
                         "Welcome to Newts",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                        ),
+                        style: Theme.of(context).textTheme.titleMedium!
+                            .copyWith(color: Color(0xFF141414)),
                       ),
-                      SizedBox(height: 16),
+                      SizedBox(height: AppSizes.ph16),
                       CustomTextFormField(
                         controller: emailController,
                         hintText: 'usama@gmail.com',
@@ -137,7 +137,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           }
                         },
                       ),
-                      SizedBox(height: 12),
+                      SizedBox(height: AppSizes.ph12),
                       CustomTextFormField(
                         controller: passwordController,
                         hintText: '*************',
@@ -158,7 +158,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         onChanged: validatePassword,
                         obscureText: true,
                       ),
-                      SizedBox(height: 8),
+                      SizedBox(height: AppSizes.ph8),
                       PasswordValidationConditions(
                         hasLower: hasLower,
                         hasUpper: hasUpper,
@@ -166,7 +166,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         hasNumber: hasNumber,
                         hasSpecial: hasSpecial,
                       ),
-                      SizedBox(height: 12),
+                      SizedBox(height: AppSizes.ph12),
                       CustomTextFormField(
                         controller: confirmPasswordController,
                         hintText: '*************',
@@ -179,9 +179,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         },
                         obscureText: true,
                       ),
-                      SizedBox(height: 12),
-                      if(errorMessage != null) Text(errorMessage!, style: TextStyle(color: Theme.of(context).primaryColor),),
-                      SizedBox(height: 20),
+                      SizedBox(height: AppSizes.ph12),
+                      if (errorMessage != null)
+                        Text(
+                          errorMessage!,
+                          style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                          ),
+                        ),
+                      SizedBox(height: AppSizes.ph20),
                       CustomButton(
                         btnTitle: 'Sign Up',
                         onPressed: () {
@@ -191,25 +197,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         },
                         isLoading: isLoading,
                       ),
-                      SizedBox(height: 24),
+                      SizedBox(height: AppSizes.ph24),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             'Have an account ?',
-                            style: TextStyle(fontSize: 14),
+                            style: Theme.of(context).textTheme.labelMedium,
                           ),
-                          SizedBox(width: 8),
+                          SizedBox(width: AppSizes.pw8),
                           GestureDetector(
                             onTap: () {
                               Navigator.pop(context);
                             },
                             child: Text(
                               'Sign In',
-                              style: TextStyle(
-                                color: Theme.of(context).primaryColor,
-                                fontSize: 16,
-                              ),
+                              style: Theme.of(context).textTheme.titleSmall,
                             ),
                           ),
                         ],

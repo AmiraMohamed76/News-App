@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/constants/app_sizes.dart';
 import 'package:news_app/core/enums/request_status_enum.dart';
 import 'package:news_app/core/extensions/date_time_extension.dart';
-import 'package:news_app/core/theme/light_colors.dart';
 import 'package:news_app/core/widgets/custom_cached_network_image.dart';
 import 'package:news_app/features/home/components/trending_news_shimmer.dart';
 import 'package:news_app/features/home/components/view_all_component.dart';
@@ -15,37 +15,34 @@ class TrendingNews extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: SizedBox(
-        height: 290,
+        height: AppSizes.h290,
         child: Stack(
           children: [
             SizedBox(
               width: double.infinity,
-              height: 240,
+              height: AppSizes.h240,
               child: Image.asset(
                 'assets/images/home_background.png',
                 fit: BoxFit.cover,
               ),
             ),
             Positioned.fill(
-              top: 40,
+              top: AppSizes.ph40,
               child: Column(
                 children: [
-                  Text(
-                    "NEWST",
-                    style: TextStyle(
-                      fontSize: 40,
-                      fontWeight: FontWeight.w600,
-                      color: LightColors.primaryColor,
-                    ),
-                  ),
-                  SizedBox(height: 6),
+                  Text("NEWST", style: Theme.of(context).textTheme.titleLarge),
+                  SizedBox(height: AppSizes.ph6),
                   ViewAllComponent(title: "Trending News", onTap: () {}),
-                  SizedBox(height: 12),
+                  SizedBox(height: AppSizes.ph12),
                   SizedBox(
-                    height: 140,
+                    height: AppSizes.h140,
                     child: Consumer<HomeController>(
                       builder:
-                          (BuildContext context, HomeController controller, Widget? child) {
+                          (
+                            BuildContext context,
+                            HomeController controller,
+                            Widget? child,
+                          ) {
                             switch (controller.everythingStatus) {
                               case RequestStatusEnum.loading:
                                 return TrendingNewsShimmer();
@@ -55,38 +52,44 @@ class TrendingNews extends StatelessWidget {
                                 );
                               case RequestStatusEnum.loaded:
                                 return ListView.separated(
-                                  padding: EdgeInsets.only(left: 16),
+                                  padding: EdgeInsets.only(left: AppSizes.ph16),
                                   scrollDirection: Axis.horizontal,
                                   itemCount: controller.newsEverythingList
                                       .take(6)
                                       .length,
                                   separatorBuilder:
                                       (BuildContext context, int index) =>
-                                          SizedBox(width: 12),
+                                          SizedBox(width: AppSizes.pw12),
                                   itemBuilder: (context, index) {
                                     final item =
                                         controller.newsEverythingList[index];
                                     return Container(
-                                      width: 260,
-                                      height: 140,
+                                      width: AppSizes.w260,
+                                      height: AppSizes.h140,
                                       decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(12),
+                                        borderRadius: BorderRadius.circular(
+                                          AppSizes.r12,
+                                        ),
                                         border: Border.all(color: Colors.white),
                                       ),
                                       child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(12),
+                                        borderRadius: BorderRadius.circular(
+                                          AppSizes.r12,
+                                        ),
                                         child: Stack(
                                           children: [
                                             CustomCachedNetworkImage(
                                               imagePath: item.urlToImage ?? "",
-                                              width: 260,
-                                              height: 140,
+                                              width: AppSizes.w260,
+                                              height: AppSizes.h140,
                                             ),
                                             Positioned.fill(
                                               child: Container(
                                                 decoration: BoxDecoration(
                                                   borderRadius:
-                                                      BorderRadius.circular(12),
+                                                      BorderRadius.circular(
+                                                        AppSizes.r12,
+                                                      ),
                                                   gradient: LinearGradient(
                                                     begin: Alignment.topCenter,
                                                     end: Alignment.bottomCenter,
@@ -103,26 +106,26 @@ class TrendingNews extends StatelessWidget {
                                               ),
                                             ),
                                             Positioned(
-                                              bottom: 12,
-                                              right: 12,
-                                              left: 12,
+                                              bottom: AppSizes.ph12,
+                                              right: AppSizes.pw12,
+                                              left: AppSizes.pw12,
                                               child: Column(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
                                                     item.title,
-                                                    style: TextStyle(
+                                                    style: Theme.of(context).textTheme.labelMedium!.copyWith(
                                                       color: Color(0xFFFFFCFC),
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      fontSize: 14,
+                                                      fontWeight: FontWeight.w700,
                                                     ),
                                                     maxLines: 2,
                                                     overflow:
                                                         TextOverflow.ellipsis,
                                                   ),
-                                                  SizedBox(height: 4),
+                                                  SizedBox(
+                                                    height: AppSizes.ph4,
+                                                  ),
                                                   Row(
                                                     children: [
                                                       Expanded(
@@ -134,22 +137,18 @@ class TrendingNews extends StatelessWidget {
                                                                     item.urlToImage
                                                                         .toString(),
                                                                   ),
-                                                              radius: 10,
+                                                              radius:
+                                                                  AppSizes.r10,
                                                             ),
-                                                            SizedBox(width: 4),
+                                                            SizedBox(
+                                                              width:
+                                                                  AppSizes.pw4,
+                                                            ),
                                                             Expanded(
                                                               child: Text(
                                                                 item.author ??
                                                                     "Not Found",
-                                                                style: TextStyle(
-                                                                  color: Color(
-                                                                    0xFFFFFCFC,
-                                                                  ),
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                  fontSize: 12,
-                                                                ),
+                                                                style: Theme.of(context).textTheme.labelSmall!.copyWith( color: Color(0xFFFFFCFC),),
                                                                 maxLines: 1,
                                                               ),
                                                             ),
@@ -159,14 +158,7 @@ class TrendingNews extends StatelessWidget {
                                                       Text(
                                                         item.publishedAt
                                                             .formatDateTime(),
-                                                        style: TextStyle(
-                                                          color: Color(
-                                                            0xFFFFFCFC,
-                                                          ),
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontSize: 14,
-                                                        ),
+                                                        style: Theme.of(context).textTheme.labelMedium!.copyWith(color: Color(0xFFFFFCFC),)
                                                       ),
                                                     ],
                                                   ),

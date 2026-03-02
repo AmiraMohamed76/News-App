@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/constants/app_sizes.dart';
 
 class PasswordValidationConditions extends StatelessWidget {
   final bool hasUpper;
@@ -36,9 +37,9 @@ class PasswordValidationConditions extends StatelessWidget {
         Icon(
           isValid ? Icons.check_circle_outline : Icons.cancel_outlined,
           color: isValid ? Colors.green : Theme.of(context).primaryColor,
-          size: 18,
+          size: AppSizes.r18,
         ),
-        SizedBox(width: 8),
+        SizedBox(width: AppSizes.pw8),
         Text(
           text,
           style: TextStyle(

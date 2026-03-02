@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/constants/app_sizes.dart';
 import 'package:shimmer/shimmer.dart';
 
 class TopHeadlineShimmer extends StatelessWidget {
@@ -10,7 +11,7 @@ class TopHeadlineShimmer extends StatelessWidget {
       itemCount: 15,
       itemBuilder: (BuildContext context, int index) {
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+          padding: EdgeInsets.symmetric(horizontal: AppSizes.pw16, vertical: AppSizes.ph8),
           child: Row(
             children: [
               Shimmer.fromColors(
@@ -18,10 +19,10 @@ class TopHeadlineShimmer extends StatelessWidget {
                 highlightColor: Colors.grey.shade100,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
-                  child: Container(width: 140, height: 85, color: Colors.white),
+                  child: Container(width: AppSizes.w140, height: AppSizes.h85, color: Colors.white),
                 ),
               ),
-              SizedBox(width: 8),
+              SizedBox(width: AppSizes.pw8),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,24 +31,24 @@ class TopHeadlineShimmer extends StatelessWidget {
                     Shimmer.fromColors(
                       baseColor: Colors.grey.shade300,
                       highlightColor: Colors.grey.shade100,
-                      child: Container(height: 15, color: Colors.white),
+                      child: Container(height: AppSizes.h15, color: Colors.white),
                     ),
-                    SizedBox(height: 4),
+                    SizedBox(height: AppSizes.ph4),
                     Row(
                       children: [
                         Shimmer.fromColors(
                           baseColor: Colors.grey.shade300,
                           highlightColor: Colors.grey.shade100,
                           child: Container(
-                            height: 20,
-                            width: 20,
+                            height: AppSizes.h20,
+                            width: AppSizes.w20,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: Colors.white,
                             ),
                           ),
                         ),
-                        SizedBox(width: 4),
+                        SizedBox(width: AppSizes.pw4),
                         Expanded(
                           child: Row(
                             children: [
@@ -55,8 +56,8 @@ class TopHeadlineShimmer extends StatelessWidget {
                                 baseColor: Colors.grey.shade300,
                                 highlightColor: Colors.grey.shade100,
                                 child: Container(
-                                  height: 10,
-                                  width: 50,
+                                  height: AppSizes.h10,
+                                  width: AppSizes.w50,
                                   color: Colors.white,
                                 ),
                               ),

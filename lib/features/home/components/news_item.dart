@@ -1,7 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:news_app/core/constants/app_sizes.dart';
 import 'package:news_app/core/extensions/date_time_extension.dart';
+import 'package:news_app/core/services/theme_controller.dart';
+import 'package:news_app/core/theme/light_colors.dart';
 import 'package:news_app/core/widgets/custom_cached_network_image.dart';
 import 'package:news_app/core/widgets/custom_svg_picture.dart';
 import 'package:news_app/features/home/models/news_article_model.dart';
@@ -13,15 +16,19 @@ class NewsItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+      padding: EdgeInsets.symmetric(
+        horizontal: AppSizes.pw16,
+        vertical: AppSizes.ph8,
+      ),
       child: Row(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(AppSizes.r12),
             child: CustomCachedNetworkImage(imagePath: item.urlToImage ?? ""),
           ),
-          SizedBox(width: 8),
+          SizedBox(width: AppSizes.pw8),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,23 +36,24 @@ class NewsItem extends StatelessWidget {
               children: [
                 Text(
                   item.title,
-                  style: TextStyle(
-                    color: Color(0xFF141414),
+                  style: Theme.of(context).textTheme.labelMedium!.copyWith(
                     fontWeight: FontWeight.w700,
-                    fontSize: 14,
+                    color: ThemeController.isDark()
+                        ? DarkColors.whiteColor
+                        : LightColors.backColor,
                   ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
-                SizedBox(height: 4),
+                SizedBox(height: AppSizes.ph4),
                 Row(
                   children: [
                     if (item.urlToImage != null)
                       CircleAvatar(
                         backgroundImage: NetworkImage(item.urlToImage!),
-                        radius: 10,
+                        radius: AppSizes.r10,
                       ),
-                    SizedBox(width: 4),
+                    SizedBox(width: AppSizes.pw4),
                     Expanded(
                       child: Row(
                         children: [
@@ -54,25 +62,27 @@ class NewsItem extends StatelessWidget {
                               0,
                               min((item.author ?? "Not Found").length, 10),
                             ),
-                            style: TextStyle(
-                              color: Color(0xFF141414),
-                              fontWeight: FontWeight.w400,
-                              fontSize: 12,
+                            style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                              color: ThemeController.isDark()
+                                  ? DarkColors.geryColor
+                                  : LightColors.backColor,
                             ),
                             maxLines: 1,
                           ),
-                          SizedBox(width: 4),
+                          SizedBox(width: AppSizes.pw4),
                           Expanded(
                             child: Text(
                               item.publishedAt.formatDateTime(),
-                              style: TextStyle(
-                                color: Color(0xFF141414),
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14,
+                              style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                                color: ThemeController.isDark()
+                                    ? DarkColors.geryColor
+                                    : LightColors.backColor,
                               ),
                             ),
                           ),
-                          CustomSvgPicture.withoutColor(imagePath: 'assets/images/bookmark.svg'),
+                          CustomSvgPicture.withoutColor(
+                            imagePath: 'assets/images/bookmark.svg',
+                          ),
                         ],
                       ),
                     ),

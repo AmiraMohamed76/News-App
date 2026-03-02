@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/constants/storage_key.dart';
 import 'package:news_app/core/data_source/local_data/preferences_manager.dart';
 import 'package:news_app/features/auth/login_screen.dart';
 
@@ -23,7 +24,7 @@ class OnboardingController extends ChangeNotifier {
   }
 
   void onFinish(BuildContext context) async {
-    await PreferencesManager().setBool('onboarding_complete', true);
+    await PreferencesManager().setBool(StorageKey.onboardingComplete, true);
     if(!context.mounted) return;
     Navigator.pushReplacement(
       context,

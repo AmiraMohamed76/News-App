@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/constants/app_sizes.dart';
 
 class CustomButton extends StatelessWidget {
   final String btnTitle;
@@ -12,10 +13,7 @@ class CustomButton extends StatelessWidget {
       onPressed: () {
         onPressed();
       } ,
-      style: ElevatedButton.styleFrom(
-        fixedSize: Size(MediaQuery.of(context).size.width, 48),
-      ),
-      child: isLoading? CircularProgressIndicator(color: Colors.white,padding: EdgeInsets.all(4)):Text(btnTitle),
+      child: isLoading? CircularProgressIndicator(color: Colors.white,padding: EdgeInsets.all(AppSizes.pw4)):Text(btnTitle),
     );
   }
 }
