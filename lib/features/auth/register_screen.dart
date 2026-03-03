@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:news_app/core/constants/app_sizes.dart';
 import 'package:news_app/core/constants/storage_key.dart';
 import 'package:news_app/core/data_source/local_data/preferences_manager.dart';
+import 'package:news_app/core/services/theme_controller.dart';
+import 'package:news_app/core/theme/light_colors.dart';
 import 'package:news_app/core/widgets/custom_button.dart';
 import 'package:news_app/core/widgets/custom_text_form_field.dart';
 import 'package:news_app/features/auth/widgets/password_validation_condition.dart';
@@ -85,6 +87,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: Container(
@@ -92,6 +95,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         width: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
+            fit: BoxFit.cover,
             image: AssetImage('assets/images/background_image.png'),
           ),
         ),
@@ -115,8 +119,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       SizedBox(height: AppSizes.ph40),
                       Text(
                         "Welcome to Newts",
-                        style: Theme.of(context).textTheme.titleMedium!
-                            .copyWith(color: Color(0xFF141414)),
+                        style: theme.textTheme.titleMedium
+                        // !.copyWith(color: Color(0xFF141414)),
                       ),
                       SizedBox(height: AppSizes.ph16),
                       CustomTextFormField(
@@ -184,7 +188,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         Text(
                           errorMessage!,
                           style: TextStyle(
-                            color: Theme.of(context).primaryColor,
+                            color: theme.primaryColor,
                           ),
                         ),
                       SizedBox(height: AppSizes.ph20),
@@ -203,7 +207,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         children: [
                           Text(
                             'Have an account ?',
-                            style: Theme.of(context).textTheme.labelMedium,
+                            style: theme.textTheme.labelMedium!.copyWith(
+                              color:  theme.colorScheme.onPrimary,
+                            ),
                           ),
                           SizedBox(width: AppSizes.pw8),
                           GestureDetector(
@@ -212,7 +218,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             },
                             child: Text(
                               'Sign In',
-                              style: Theme.of(context).textTheme.titleSmall,
+                              style: theme.textTheme.titleSmall,
                             ),
                           ),
                         ],

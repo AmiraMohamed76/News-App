@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/core/constants/app_sizes.dart';
-import 'package:news_app/core/services/theme_controller.dart';
 import 'package:news_app/core/theme/light_colors.dart';
 import 'package:news_app/features/home/home_controller.dart';
 import 'package:provider/provider.dart';
@@ -21,6 +20,7 @@ class CategoriesFilter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Consumer<HomeController>(
       builder: (BuildContext context, HomeController controller, Widget? child) {
         return Padding(
@@ -51,7 +51,7 @@ class CategoriesFilter extends StatelessWidget {
                         Text(
                             categories[index][0].toUpperCase() +
                                 categories[index].substring(1),
-                            style:  Theme.of(context).textTheme.titleSmall!.copyWith(color: ThemeController.isDark()? DarkColors.darkGeryColor : LightColors.backColor,)
+                            style: theme.textTheme.titleSmall!.copyWith(color: theme.colorScheme.primary,)
                         ),
                         if (isSelected) ...[
                           SizedBox(height: AppSizes.ph4),

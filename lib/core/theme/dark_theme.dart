@@ -6,7 +6,13 @@ ThemeData darkTheme = ThemeData(
   useMaterial3: true,
   brightness: Brightness.dark,
   colorScheme: ColorScheme.dark(
+    surface: DarkColors.lightGeryColor,
+    primary: Color(0xFFFFFCFC),
     secondary: DarkColors.geryColor,
+    onSurface:DarkColors.whiteColor,
+    onPrimary: DarkColors.whiteColor,
+    onSecondary: DarkColors.geryColor,
+    primaryContainer: Color(0xFF141414),
   ),
   scaffoldBackgroundColor: DarkColors.scaffoldBackgroundColor,
   primaryColor: DarkColors.primaryColor,
@@ -76,14 +82,14 @@ ThemeData darkTheme = ThemeData(
       fontWeight: FontWeight.w700,
     ),
     labelSmall: TextStyle(
-      color: DarkColors.backColor,
+      color: DarkColors.blackColor,
       fontSize: AppSizes.sp12,
       fontWeight: FontWeight.w400,
     ),
     labelMedium: TextStyle(
       fontSize: AppSizes.sp14,
       fontWeight: FontWeight.w400,
-      color: DarkColors.backColor,
+      color: DarkColors.blackColor,
     ),
     labelLarge: TextStyle(
       fontSize: AppSizes.sp16,
@@ -107,22 +113,22 @@ ThemeData darkTheme = ThemeData(
   inputDecorationTheme: InputDecorationTheme(
     hintStyle: TextStyle(color: DarkColors.geryColor),
     filled: true,
-    fillColor: Colors.white,
+    fillColor: DarkColors.backgroundColor,
     border: OutlineInputBorder(
       borderRadius: BorderRadius.zero,
-      borderSide: BorderSide(color: DarkColors.lightGeryColor, width: 0),
+      borderSide: BorderSide(color: DarkColors.backgroundColor, width: 0),
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.zero,
-      borderSide: BorderSide(color: DarkColors.lightGeryColor, width: 0),
+      borderSide: BorderSide(color: DarkColors.backgroundColor, width: 0),
     ),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.zero,
-      borderSide: BorderSide(color: DarkColors.lightGeryColor, width: 0),
+      borderSide: BorderSide(color: DarkColors.backgroundColor, width: 0),
     ),
     errorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.zero,
-      borderSide: BorderSide(color: DarkColors.primaryColor, width: 0.7),
+      borderSide: BorderSide(color: DarkColors.backgroundColor, width: 0.7),
     ),
   ),
   // checkboxTheme: CheckboxThemeData(

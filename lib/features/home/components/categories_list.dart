@@ -21,7 +21,6 @@ class CategoriesList extends StatelessWidget {
                 children: [
                   ViewAllComponent(
                     title: "Categories",
-                    titleColor: ThemeController.isDark() ? Color(0xFFFFFCFC) : Color(0xFF141414),
                     onTap: () {
                       Navigator.push(
                         context,

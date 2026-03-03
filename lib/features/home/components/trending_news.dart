@@ -32,7 +32,7 @@ class TrendingNews extends StatelessWidget {
                 children: [
                   Text("NEWST", style: Theme.of(context).textTheme.titleLarge),
                   SizedBox(height: AppSizes.ph6),
-                  ViewAllComponent(title: "Trending News", onTap: () {}),
+                  ViewAllComponent(title: "Trending News", onTap: () {}, titleColor: Colors.white,),
                   SizedBox(height: AppSizes.ph12),
                   SizedBox(
                     height: AppSizes.h140,

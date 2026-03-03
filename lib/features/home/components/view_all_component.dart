@@ -22,15 +22,15 @@ class ViewAllComponent extends StatelessWidget {
         children: [
           Text(
             title,
-            style: Theme.of(context).textTheme.displayMedium!.copyWith(color: titleColor ?? Color(0xFFFFFCFC),)
+            style: Theme.of(context).textTheme.displayMedium!.copyWith(color: titleColor ?? Theme.of(context).colorScheme.primary,)
           ),
           InkWell(
             onTap: () => onTap(),
             child: Text(
               "View all",
               style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                color: titleColor ?? Color(0xFFFFFCFC),
-                decorationColor: titleColor ?? Color(0xFFFFFCFC),
+                color: titleColor ?? Theme.of(context).colorScheme.primary,
+                decorationColor: titleColor ?? Theme.of(context).colorScheme.primary,
               ),
             ),
           ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/core/constants/app_sizes.dart';
+import 'package:news_app/core/services/theme_controller.dart';
+import 'package:news_app/core/theme/light_colors.dart';
 import 'package:news_app/features/onboarding/controller/onboarding_controller.dart';
 import 'package:news_app/features/onboarding/models/onboarding_item.dart';
 import 'package:provider/provider.dart';
@@ -10,13 +12,14 @@ class OnboardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return ChangeNotifierProvider<OnboardingController>(
       create: (BuildContext context) => OnboardingController(),
       builder: (BuildContext context, _) {
         final controller = context.read<OnboardingController>();
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: Color(0xFFF5F5F5),
+            // backgroundColor: Color(0xFFF5F5F5),
             actions: [
               Consumer<OnboardingController>(
                 builder:
@@ -31,7 +34,7 @@ class OnboardingScreen extends StatelessWidget {
                               onPressed: () => controller.onFinish(context),
                               child: Text(
                                 "Skip",
-                                style: Theme.of(context).textTheme.titleSmall,
+                                style: theme.textTheme.titleSmall,
                               ),
                             );
                     },
@@ -59,13 +62,19 @@ class OnboardingScreen extends StatelessWidget {
                           SizedBox(height: AppSizes.ph24),
                           Text(
                             OnboardingModel.onboardingList[index].title,
-                            style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Color(0xFF4E4B66)),
+                            style: theme.textTheme.titleMedium!
+                                .copyWith(
+                                  color: theme.colorScheme.onSurface,
+                                ),
                           ),
                           SizedBox(height: AppSizes.ph12),
                           Text(
                             OnboardingModel.onboardingList[index].description,
                             textAlign: TextAlign.center,
-                            style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Color(0xFF6E7191),)
+                            style: theme.textTheme.titleSmall!
+                                .copyWith(
+                                  color: theme.colorScheme.surface,
+                                ),
                           ),
                         ],
                       );
@@ -75,7 +84,10 @@ class OnboardingScreen extends StatelessWidget {
                 SmoothPageIndicator(
                   controller: controller.pageController,
                   count: 3,
-                  effect: SwapEffect(dotWidth: AppSizes.w14, dotHeight: AppSizes.w14),
+                  effect: SwapEffect(
+                    dotWidth: AppSizes.w14,
+                    dotHeight: AppSizes.w14,
+                  ),
                 ),
                 SizedBox(height: AppSizes.ph45),
                 Consumer<OnboardingController>(

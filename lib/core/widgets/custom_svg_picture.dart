@@ -12,12 +12,16 @@ class CustomSvgPicture extends StatelessWidget {
     required this.imagePath,
     this.withColorFilter = true,
     this.width,
-    this.height
+    this.height,
   });
 
   // Named Constructor
-  const CustomSvgPicture.withoutColor({super.key, required this.imagePath, this.width, this.height})
-    : withColorFilter = false;
+  const CustomSvgPicture.withoutColor({
+    super.key,
+    required this.imagePath,
+    this.width,
+    this.height,
+  }) : withColorFilter = false;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +31,7 @@ class CustomSvgPicture extends StatelessWidget {
       width: width,
       colorFilter: withColorFilter
           ? ColorFilter.mode(
-              Theme.of(context).colorScheme.secondary,
+              Theme.of(context).colorScheme.onPrimary,
               BlendMode.srcIn,
             )
           : null,

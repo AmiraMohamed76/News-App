@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/services/theme_controller.dart';
+import 'package:news_app/core/theme/light_colors.dart';
 
 class CustomTextFormField extends StatefulWidget {
   final TextEditingController controller;
@@ -32,14 +34,22 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(widget.title, style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Color(0xFF141414))),
+        Text(
+          widget.title,
+          style: theme.textTheme.titleSmall!.copyWith(
+            color: theme.colorScheme.onPrimary,
+          ),
+        ),
         SizedBox(height: 8),
         TextFormField(
           controller: widget.controller,
-          style: Theme.of(context).textTheme.labelMedium,
+          style: theme.textTheme.labelMedium!.copyWith(
+            color: theme.colorScheme.onPrimary,
+          ),
           validator: widget.validator != null
               ? (String? value) => widget.validator!(value)
               : null,

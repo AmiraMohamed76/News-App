@@ -10,7 +10,9 @@ class LightColors{
   static const Color geryColor = Color(0xFF9E9E9E);
   static const Color lightGeryColor = Color(0xFFD1DAD6);
   static const Color darkGeryColor = Color(0xFF363636);
-  static const Color backColor = Color(0xFF141414);
+  static const Color blackColor = Color(0xFF141414);
+  static const Color onBoardingTitleColor = Color(0xFF4E4B66);
+  static const Color onBoardingSubtitleColor = Color(0xFF6E7191);
 }
 
 
@@ -24,5 +26,5 @@ class DarkColors{
   static const Color geryColor = Color(0xFF9E9E9E);
   static const Color lightGeryColor = Color(0xFFD1DAD6);
   static const Color darkGeryColor = Color(0xFFFFFCFC);
-  static const Color backColor = Color(0xFF141414);
+  static const Color blackColor = Color(0xFF141414);
 }

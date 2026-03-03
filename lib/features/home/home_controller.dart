@@ -2,17 +2,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:news_app/core/data_source/remote_data/api_config.dart';
 import 'package:news_app/core/data_source/remote_data/api_service.dart';
 import 'package:news_app/core/enums/request_status_enum.dart';
+import 'package:news_app/core/mixins/safe_notify_mixin.dart';
 import 'package:news_app/features/home/models/news_article_model.dart';
+import 'package:news_app/features/home/repos/news_repository.dart';
 
-class HomeController extends ChangeNotifier {
-  HomeController(){
+class HomeController extends ChangeNotifier with SafeNotify {
+  HomeController(this.newsRepository){
     getTopHeadLines();
     getEverything();
   }
 
+  BaseNewRepository newsRepository;
+
   List<NewsArticleModel> newsTopHeadLinesList = [];
   List<NewsArticleModel> newsEverythingList = [];
-  ApiService apiService = ApiService();
 
   RequestStatusEnum everythingStatus = RequestStatusEnum.loading;
   RequestStatusEnum topHeadlineStatus = RequestStatusEnum.loading;
@@ -20,20 +23,15 @@ class HomeController extends ChangeNotifier {
   String? errorMessage;
   String? selectedCategory;
 
+
+
   getTopHeadLines({String? category}) async {
     try {
       topHeadlineStatus = RequestStatusEnum.loading;
-      notifyListeners();
+      safeNotify();
 
-      Map<String, dynamic> result = await apiService.get(
-        ApiConfig.topHeadlines,
-        params: {'country': 'us',
-          'category': category,},
-      );
+      newsTopHeadLinesList = await newsRepository.getTopHeadlines(category: category);
 
-      newsTopHeadLinesList = (result['articles'] as List)
-          .map((e) => NewsArticleModel.fromJson(e))
-          .toList();
       topHeadlineStatus = RequestStatusEnum.loaded;
       errorMessage = null;
     } catch (e) {
@@ -41,19 +39,12 @@ class HomeController extends ChangeNotifier {
       errorMessage = e.toString();
     }
 
-    notifyListeners();
+    safeNotify();
   }
 
   getEverything() async {
     try {
-      Map<String, dynamic> result = await apiService.get(
-        ApiConfig.everything,
-        params: {'q': 'news'},
-      );
-
-      newsEverythingList = (result['articles'] as List)
-          .map((e) => NewsArticleModel.fromJson(e))
-          .toList();
+      newsEverythingList = await newsRepository.getEverything();
 
       everythingStatus = RequestStatusEnum.loaded;
       errorMessage = null;
@@ -62,12 +53,14 @@ class HomeController extends ChangeNotifier {
       errorMessage = e.toString();
     }
 
-    notifyListeners();
+    safeNotify();
   }
 
   void updateCategories(String category){
     selectedCategory = category;
     getTopHeadLines(category: selectedCategory);
-    notifyListeners();
+    safeNotify();
   }
+
+
 }

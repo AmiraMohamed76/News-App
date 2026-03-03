@@ -75,6 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: Container(
@@ -107,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(height: AppSizes.ph40),
                       Text(
                         "Welcome to Newts",
-                        style: Theme.of(context).textTheme.titleMedium,
+                        style: theme.textTheme.titleMedium,
                       ),
                       SizedBox(height: AppSizes.ph16),
                       CustomTextFormField(
@@ -146,7 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Text(
                           errorMessage!,
                           style: TextStyle(
-                            color: Theme.of(context).primaryColor,
+                            color: theme.primaryColor,
                           ),
                         ),
                       SizedBox(height: AppSizes.ph20),
@@ -165,7 +166,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         children: [
                           Text(
                             'Don’t have an account ?',
-                            style: Theme.of(context).textTheme.labelMedium
+                            style: theme.textTheme.labelMedium!.copyWith(
+                              color:  theme.colorScheme.onPrimary,
+                            ),
                           ),
                           SizedBox(width: AppSizes.pw8),
                           GestureDetector(
@@ -181,7 +184,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
                             child: Text(
                               'Sign Up',
-                              style: Theme.of(context).textTheme.titleSmall,
+                              style: theme.textTheme.titleSmall,
                             ),
                           ),
                         ],

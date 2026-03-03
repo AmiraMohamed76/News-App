@@ -6,13 +6,13 @@ ThemeData lightTheme = ThemeData(
   useMaterial3: true,
   brightness: Brightness.light,
   colorScheme: ColorScheme.light(
-    //   primaryContainer: Color(0xFFFFFFFF),
-    //   primary: LightColors.lightGeryColor,
-    //   onPrimary: LightColors.lightGeryColor,
+    surface:  LightColors.onBoardingSubtitleColor,
+    primary: Color(0xFF141414),
     secondary: LightColors.darkGeryColor,
-    //   onSecondary: Color(0xFF14A662),
-    //   surface: Color(0xFF3A4640),
-    //   onSurface: LightColors.geryColor,
+    onSurface:LightColors.onBoardingTitleColor,
+    onPrimary: LightColors.blackColor,
+    onSecondary: LightColors.blackColor,
+    primaryContainer: Colors.white
   ),
   scaffoldBackgroundColor: LightColors.scaffoldBackgroundColor,
   primaryColor: LightColors.primaryColor,
@@ -82,14 +82,14 @@ ThemeData lightTheme = ThemeData(
       fontWeight: FontWeight.w700,
     ),
     labelSmall: TextStyle(
-      color: LightColors.backColor,
+      color: LightColors.blackColor,
       fontSize: AppSizes.sp12,
       fontWeight: FontWeight.w400,
     ),
     labelMedium: TextStyle(
       fontSize: AppSizes.sp14,
       fontWeight: FontWeight.w400,
-      color: LightColors.backColor,
+      color: LightColors.blackColor,
     ),
     labelLarge: TextStyle(
       fontSize: AppSizes.sp16,

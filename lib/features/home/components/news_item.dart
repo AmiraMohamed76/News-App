@@ -16,7 +16,7 @@ class NewsItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    final theme = Theme.of(context);
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: AppSizes.pw16,
@@ -36,11 +36,9 @@ class NewsItem extends StatelessWidget {
               children: [
                 Text(
                   item.title,
-                  style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                  style: theme.textTheme.labelMedium!.copyWith(
                     fontWeight: FontWeight.w700,
-                    color: ThemeController.isDark()
-                        ? DarkColors.whiteColor
-                        : LightColors.backColor,
+                    color: theme.colorScheme.onPrimary,
                   ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -62,10 +60,8 @@ class NewsItem extends StatelessWidget {
                               0,
                               min((item.author ?? "Not Found").length, 10),
                             ),
-                            style: Theme.of(context).textTheme.labelSmall!.copyWith(
-                              color: ThemeController.isDark()
-                                  ? DarkColors.geryColor
-                                  : LightColors.backColor,
+                            style: theme.textTheme.labelSmall!.copyWith(
+                              color: theme.colorScheme.onSecondary,
                             ),
                             maxLines: 1,
                           ),
@@ -73,10 +69,8 @@ class NewsItem extends StatelessWidget {
                           Expanded(
                             child: Text(
                               item.publishedAt.formatDateTime(),
-                              style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                                color: ThemeController.isDark()
-                                    ? DarkColors.geryColor
-                                    : LightColors.backColor,
+                              style: theme.textTheme.labelMedium!.copyWith(
+                                color: theme.colorScheme.onSecondary,
                               ),
                             ),
                           ),

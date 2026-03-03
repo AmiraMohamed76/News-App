@@ -12,7 +12,6 @@ void main() async {
 
   await PreferencesManager().init();
   ThemeController().init();
-  // PreferencesManager().clear();
   runApp(const MyApp());
 }
 
