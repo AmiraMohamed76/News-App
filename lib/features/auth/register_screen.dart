@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:news_app/core/constants/app_sizes.dart';
 import 'package:news_app/core/constants/storage_key.dart';
 import 'package:news_app/core/data_source/local_data/preferences_manager.dart';
-import 'package:news_app/core/services/theme_controller.dart';
-import 'package:news_app/core/theme/light_colors.dart';
 import 'package:news_app/core/widgets/custom_button.dart';
 import 'package:news_app/core/widgets/custom_text_form_field.dart';
 import 'package:news_app/features/auth/widgets/password_validation_condition.dart';
@@ -17,12 +15,10 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  final TextEditingController userNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
-
   final TextEditingController passwordController = TextEditingController();
-
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -61,14 +57,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
         errorMessage = "User Already Registered";
       });
     } else {
-      await PreferencesManager().setString(
-        "user_email",
-        emailController.text.trim(),
-      );
-      await PreferencesManager().setString(
-        StorageKey.userPassword,
-        passwordController.text.trim(),
-      );
+      await PreferencesManager().setString(StorageKey.userEmail, emailController.text.trim());
+      await PreferencesManager().setString(StorageKey.userPassword, passwordController.text.trim());
+      await PreferencesManager().setString(StorageKey.userPassword, passwordController.text.trim());
+      await PreferencesManager().setString(StorageKey.userName, userNameController.text.trim());
       await PreferencesManager().setBool(StorageKey.isLoggedIn, true);
       setState(() {
         isLoading = false;
@@ -123,6 +115,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         // !.copyWith(color: Color(0xFF141414)),
                       ),
                       SizedBox(height: AppSizes.ph16),
+                      CustomTextFormField(
+                        controller: userNameController,
+                        hintText: 'e.g. Ahmed Mohamed',
+                        title: 'User Name',
+                        validator: (String? value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return "Please Enter your Name";
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: AppSizes.ph12),
                       CustomTextFormField(
                         controller: emailController,
                         hintText: 'usama@gmail.com',

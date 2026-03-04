@@ -3,6 +3,7 @@ import 'package:news_app/core/constants/app_sizes.dart';
 import 'package:news_app/core/data_source/remote_data/api_service.dart';
 import 'package:news_app/core/enums/request_status_enum.dart';
 import 'package:news_app/core/widgets/custom_svg_picture.dart';
+import 'package:news_app/features/details/news_details_screen.dart';
 import 'package:news_app/features/home/repos/news_repository.dart';
 import 'package:news_app/features/search/search_controller.dart';
 import 'package:provider/provider.dart';
@@ -46,7 +47,21 @@ class SearchScreen extends StatelessWidget {
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(AppSizes.r4),
                               borderSide: BorderSide(
-                                color: Color(0xFFD3D3D3),
+                                color: Theme.of(context).colorScheme.secondaryContainer,
+                                width: 1,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(AppSizes.r4),
+                              borderSide: BorderSide(
+                                color: Theme.of(context).colorScheme.secondaryContainer,
+                                width: 1,
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(AppSizes.r4),
+                              borderSide: BorderSide(
+                                color: Theme.of(context).colorScheme.secondaryContainer,
                                 width: 1,
                               ),
                             ),
@@ -59,8 +74,13 @@ class SearchScreen extends StatelessWidget {
                           itemCount: controller.newsEverythingList.length,
                           itemBuilder: (BuildContext context, int index) {
                             final item = controller.newsEverythingList[index];
-
                             return ListTile(
+                              onTap: () {
+                                Navigator.push(
+                                    context, MaterialPageRoute(builder: (BuildContext context) {
+                                  return NewsDetailsScreen(item: item);
+                                }));
+                              },
                               leading: Padding(
                                 padding: EdgeInsets.all(AppSizes.pw12),
                                 child: CustomSvgPicture.withoutColor(

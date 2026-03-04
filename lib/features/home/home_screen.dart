@@ -21,19 +21,6 @@ class HomeScreen extends StatelessWidget {
               return Scaffold(
                 body: Column(
                   children: [
-                    SizedBox(height: 20,),
-                    ValueListenableBuilder<ThemeMode>(
-                    valueListenable: ThemeController.themeNotifier,
-                    builder: (BuildContext context, value, Widget? child) {
-                      return Switch(
-                        value: value == ThemeMode.dark,
-                        // check if theme is dark (true) or light (false)
-                        onChanged: (bool value) async {
-                          ThemeController.toggleTheme();
-                        },
-                      );
-                    },
-                  ),
                     Expanded(
                       child: CustomScrollView(
                         slivers: [

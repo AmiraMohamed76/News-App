@@ -12,7 +12,9 @@ ThemeData lightTheme = ThemeData(
     onSurface:LightColors.onBoardingTitleColor,
     onPrimary: LightColors.blackColor,
     onSecondary: LightColors.blackColor,
-    primaryContainer: Colors.white
+    primaryContainer: Colors.white,
+
+    secondaryContainer:Color(0xFFD3D3D3)
   ),
   scaffoldBackgroundColor: LightColors.scaffoldBackgroundColor,
   primaryColor: LightColors.primaryColor,
@@ -25,32 +27,32 @@ ThemeData lightTheme = ThemeData(
     ),
     centerTitle: true,
   ),
-  // switchTheme: SwitchThemeData(
-  //   trackColor: WidgetStateProperty.resolveWith((states) {
-  //     if (states.contains(WidgetState.selected)) {
-  //       return Color(0xFF14A662);
-  //     }
-  //     return Colors.white;
-  //   }),
-  //   thumbColor: WidgetStateProperty.resolveWith((states) {
-  //     if (states.contains(WidgetState.selected)) {
-  //       return Colors.white;
-  //     }
-  //     return LightColors.geryColor;
-  //   }),
-  //   trackOutlineColor: WidgetStateProperty.resolveWith((states) {
-  //     if (states.contains(WidgetState.selected)) {
-  //       return null;
-  //     }
-  //     return LightColors.geryColor;
-  //   }),
-  //   trackOutlineWidth: WidgetStateProperty.resolveWith((states) {
-  //     if (states.contains(WidgetState.selected)) {
-  //       return 0;
-  //     }
-  //     return 2;
-  //   }),
-  // ),
+  switchTheme: SwitchThemeData(
+    trackColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
+        return LightColors.primaryColor;
+      }
+      return Colors.white;
+    }),
+    thumbColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
+        return Colors.white;
+      }
+      return LightColors.geryColor;
+    }),
+    trackOutlineColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
+        return null;
+      }
+      return LightColors.geryColor;
+    }),
+    trackOutlineWidth: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
+        return 0;
+      }
+      return 2;
+    }),
+  ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       foregroundColor: LightColors.whiteColor,

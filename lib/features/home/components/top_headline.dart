@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/core/enums/request_status_enum.dart';
+import 'package:news_app/features/details/news_details_screen.dart';
 import 'package:news_app/features/home/components/news_item.dart';
 import 'package:news_app/features/home/components/top_headline_shimmer.dart';
 import 'package:news_app/features/home/home_controller.dart';
@@ -25,7 +26,12 @@ class TopHeadline extends StatelessWidget {
                   itemCount: controller.newsTopHeadLinesList.length,
                   itemBuilder: (BuildContext context, int index) {
                     final item = controller.newsTopHeadLinesList[index];
-                    return NewsItem(item: item);
+                    return GestureDetector( onTap: () {
+                      Navigator.push(
+                          context, MaterialPageRoute(builder: (BuildContext context) {
+                        return NewsDetailsScreen(item: item);
+                      }));
+                    },child: NewsItem(item: item));
                   },
                 );
             }
