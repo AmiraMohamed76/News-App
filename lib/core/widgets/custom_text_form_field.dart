@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/core/services/theme_controller.dart';
-import 'package:news_app/core/theme/light_colors.dart';
 
 class CustomTextFormField extends StatefulWidget {
   final TextEditingController controller;

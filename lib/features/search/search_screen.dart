@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/core/constants/app_sizes.dart';
 import 'package:news_app/core/data_source/remote_data/api_service.dart';
-import 'package:news_app/core/enums/request_status_enum.dart';
 import 'package:news_app/core/widgets/custom_svg_picture.dart';
 import 'package:news_app/features/details/news_details_screen.dart';
 import 'package:news_app/features/home/repos/news_repository.dart';

@@ -4,6 +4,7 @@ import 'package:news_app/core/data_source/local_data/preferences_manager.dart';
 import 'package:news_app/core/services/theme_controller.dart';
 import 'package:news_app/core/theme/dark_theme.dart';
 import 'package:news_app/core/theme/light_theme.dart';
+import 'package:news_app/features/profile/user_repo/user_repository.dart';
 import 'package:news_app/features/splash/splash_screen.dart';
 
 void main() async {
@@ -11,6 +12,7 @@ void main() async {
   await ScreenUtil.ensureScreenSize();
 
   await PreferencesManager().init();
+  await UserRepository().init();
   ThemeController().init();
   runApp(const MyApp());
 }

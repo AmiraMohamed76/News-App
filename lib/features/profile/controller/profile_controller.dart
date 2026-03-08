@@ -4,6 +4,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:news_app/core/constants/storage_key.dart';
 import 'package:news_app/core/data_source/local_data/preferences_manager.dart';
 import 'package:news_app/core/mixins/safe_notify_mixin.dart';
+import 'package:news_app/core/model/user_model.dart';
+import 'package:news_app/features/profile/user_repo/user_repository.dart';
 
 class ProfileController extends ChangeNotifier with SafeNotify{
   XFile? selectedImage;
@@ -19,13 +21,15 @@ class ProfileController extends ChangeNotifier with SafeNotify{
   }
 
   void getUserData(){
-    userName = PreferencesManager().getString(StorageKey.userName) ?? "";
-    countryName = PreferencesManager().getString(StorageKey.countryName);
-    countryCode = PreferencesManager().getString(StorageKey.countryCode);
+    final UserModel user = UserRepository().getUser();
+    userName = user.userName;
+    countryName = user.countryName;
+    countryCode = user.countryCode;
     safeNotify();
   }
 
   void saveSelectedCountry(Country selectedCountry) async{
+
     await PreferencesManager().setString(StorageKey.countryName, selectedCountry.name);
     await PreferencesManager().setString(StorageKey.countryCode, selectedCountry.countryCode);
 

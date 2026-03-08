@@ -6,6 +6,7 @@ import 'package:news_app/core/widgets/custom_button.dart';
 import 'package:news_app/core/widgets/custom_text_form_field.dart';
 import 'package:news_app/features/auth/register_screen.dart';
 import 'package:news_app/features/navigation/main_screen.dart';
+import 'package:news_app/features/profile/user_repo/user_repository.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -33,27 +34,19 @@ class _LoginScreenState extends State<LoginScreen> {
 
     await Future.delayed(Duration(seconds: 3));
 
-    final savedEmail = PreferencesManager().getString(StorageKey.userEmail);
-    final savedPassword = PreferencesManager().getString(StorageKey.userPassword);
+   String? error = UserRepository().login(
+      emailController.text.trim(),
+      passwordController.text.trim(),
+    );
 
-    if (savedEmail == null || savedPassword == null) {
-      setState(() {
-        isLoading = false;
-        errorMessage = "No Account Found Please Register First";
-      });
-
-      return;
-    }
-
-    if (savedEmail != emailController.text.trim() ||
-        savedPassword != passwordController.text.trim()) {
-      setState(() {
-        isLoading = false;
-        errorMessage = "Incorrect Email or Password";
-      });
-
-      return;
-    }
+   print("error $error");
+   if(error != null){
+     setState(() {
+       isLoading = false;
+       errorMessage = error;
+     });
+     return;
+   }
 
     await PreferencesManager().setBool(StorageKey.isLoggedIn, true);
 

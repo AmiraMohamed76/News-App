@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/core/services/theme_controller.dart';
-
 import 'package:news_app/features/home/categories_screen.dart';
 import 'package:news_app/features/home/components/categories_filter.dart';
 import 'package:news_app/features/home/components/view_all_component.dart';

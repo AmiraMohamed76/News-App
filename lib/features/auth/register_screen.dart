@@ -6,6 +6,7 @@ import 'package:news_app/core/widgets/custom_button.dart';
 import 'package:news_app/core/widgets/custom_text_form_field.dart';
 import 'package:news_app/features/auth/widgets/password_validation_condition.dart';
 import 'package:news_app/features/navigation/main_screen.dart';
+import 'package:news_app/features/profile/user_repo/user_repository.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -49,32 +50,32 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     await Future.delayed(Duration(seconds: 3));
 
-    final savedEmail = PreferencesManager().getString(StorageKey.userEmail);
+    final error = await UserRepository().register(
+      userNameController.text.trim(),
+      emailController.text.trim(),
+      passwordController.text.trim(),
+    );
 
-    if (savedEmail != null && savedEmail == emailController.text.trim()) {
+    if (error != null) {
       setState(() {
         isLoading = false;
-        errorMessage = "User Already Registered";
+        errorMessage = error;
       });
-    } else {
-      await PreferencesManager().setString(StorageKey.userEmail, emailController.text.trim());
-      await PreferencesManager().setString(StorageKey.userPassword, passwordController.text.trim());
-      await PreferencesManager().setString(StorageKey.userPassword, passwordController.text.trim());
-      await PreferencesManager().setString(StorageKey.userName, userNameController.text.trim());
-      await PreferencesManager().setBool(StorageKey.isLoggedIn, true);
-      setState(() {
-        isLoading = false;
-      });
-      if (!mounted) return;
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) {
-            return MainScreen();
-          },
-        ),
-      );
+      return;
     }
+    await PreferencesManager().setBool(StorageKey.isLoggedIn, true);
+    setState(() {
+      isLoading = false;
+    });
+    if (!mounted) return;
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext context) {
+          return MainScreen();
+        },
+      ),
+    );
   }
 
   @override
@@ -111,7 +112,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       SizedBox(height: AppSizes.ph40),
                       Text(
                         "Welcome to Newts",
-                        style: theme.textTheme.titleMedium
+                        style: theme.textTheme.titleMedium,
                         // !.copyWith(color: Color(0xFF141414)),
                       ),
                       SizedBox(height: AppSizes.ph16),
@@ -189,12 +190,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       SizedBox(height: AppSizes.ph12),
                       if (errorMessage != null)
-                        Text(
-                          errorMessage!,
-                          style: TextStyle(
-                            color: theme.primaryColor,
-                          ),
-                        ),
+                        Text(errorMessage!, style: TextStyle(color: theme.primaryColor)),
                       SizedBox(height: AppSizes.ph20),
                       CustomButton(
                         btnTitle: 'Sign Up',
@@ -212,7 +208,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           Text(
                             'Have an account ?',
                             style: theme.textTheme.labelMedium!.copyWith(
-                              color:  theme.colorScheme.onPrimary,
+                              color: theme.colorScheme.onPrimary,
                             ),
                           ),
                           SizedBox(width: AppSizes.pw8),
@@ -220,10 +216,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             onTap: () {
                               Navigator.pop(context);
                             },
-                            child: Text(
-                              'Sign In',
-                              style: theme.textTheme.titleSmall,
-                            ),
+                            child: Text('Sign In', style: theme.textTheme.titleSmall),
                           ),
                         ],
                       ),

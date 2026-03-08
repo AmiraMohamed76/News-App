@@ -1,6 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:news_app/core/data_source/remote_data/api_config.dart';
-import 'package:news_app/core/data_source/remote_data/api_service.dart';
 import 'package:news_app/core/enums/request_status_enum.dart';
 import 'package:news_app/core/mixins/safe_notify_mixin.dart';
 import 'package:news_app/features/home/models/news_article_model.dart';

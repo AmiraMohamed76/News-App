@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/core/constants/app_sizes.dart';
-import 'package:news_app/core/constants/storage_key.dart';
-import 'package:news_app/core/data_source/local_data/preferences_manager.dart';
+import 'package:news_app/core/model/user_model.dart';
 import 'package:news_app/core/widgets/custom_button.dart';
 import 'package:news_app/core/widgets/custom_text_form_field.dart';
+import 'package:news_app/features/profile/user_repo/user_repository.dart';
 
 class PersonalInfoBottomSheet extends StatefulWidget {
   const PersonalInfoBottomSheet({super.key});
@@ -28,8 +28,9 @@ class _PersonalInfoBottomSheetState extends State<PersonalInfoBottomSheet> {
   }
 
   void _loadUserData() {
-    userNameController.text = PreferencesManager().getString(StorageKey.userName) ?? "";
-    emailController.text = PreferencesManager().getString(StorageKey.userEmail) ?? "";
+    final UserModel user = UserRepository().getUser();
+    userNameController.text = user.userName;
+    emailController.text = user.userEmail;
   }
 
   void _saveUserData() async {
@@ -39,14 +40,10 @@ class _PersonalInfoBottomSheetState extends State<PersonalInfoBottomSheet> {
 
     await Future.delayed(Duration(seconds: 3));
     if(_formKey.currentState?.validate() ?? false) {
-      await PreferencesManager().setString(
-          StorageKey.userName, userNameController.text);
-      await PreferencesManager().setString(
-          StorageKey.userEmail, emailController.text);
+      await UserRepository().updateUser(name: userNameController.text, email: emailController.text);
       setState(() {
         isLoading = false;
       });
-
       if(!context.mounted) return;
       Navigator.pop(context);
     }
