@@ -3,8 +3,10 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:news_app/core/constants/app_sizes.dart';
 import 'package:news_app/core/extensions/date_time_extension.dart';
+import 'package:news_app/core/widgets/custom_bookmark_icon_button.dart';
+import 'package:news_app/features/bookmark/controller/bookmark_controller.dart';
+import 'package:provider/provider.dart';
 import 'package:news_app/core/widgets/custom_cached_network_image.dart';
-import 'package:news_app/core/widgets/custom_svg_picture.dart';
 import 'package:news_app/features/home/models/news_article_model.dart';
 
 class NewsItem extends StatelessWidget {
@@ -72,8 +74,14 @@ class NewsItem extends StatelessWidget {
                               ),
                             ),
                           ),
-                          CustomSvgPicture.withoutColor(
-                            imagePath: 'assets/images/bookmark.svg',
+                          Consumer<BookmarkController>(
+                            builder: (context, controller, _) {
+                              final isBookmarked = controller.isBookmarked(item);
+                              return CustomBookmarkIconButton(
+                                isBookmarked: isBookmarked,
+                                onTap: () => controller.toggleBookmark(item),
+                              );
+                            },
                           ),
                         ],
                       ),

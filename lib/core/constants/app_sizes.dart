@@ -51,6 +51,7 @@ class AppSizes{
   static final double w16 = 16.w;
   static final double w20 = 20.w;
   static final double w24 = 24.w;
+  static final double w26 = 26.w;
   static final double w30 = 30.w;
   static final double w32 = 32.w;
   static final double w36 = 36.w;
@@ -58,6 +59,7 @@ class AppSizes{
   static final double w42 = 42.w;
   static final double w48 = 48.w;
   static final double w50 = 50.w;
+  static final double w100 = 100.w;
   static final double w140 = 140.w;
   static final double w200 = 200.w;
   static final double w260 = 260.w;

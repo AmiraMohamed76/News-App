@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:news_app/core/constants/app_sizes.dart';
 import 'package:news_app/core/enums/request_status_enum.dart';
 import 'package:news_app/core/extensions/date_time_extension.dart';
+import 'package:news_app/core/widgets/custom_bookmark_icon_button.dart';
 import 'package:news_app/core/widgets/custom_cached_network_image.dart';
 import 'package:news_app/features/details/news_details_screen.dart';
 import 'package:news_app/features/home/components/trending_news_shimmer.dart';
 import 'package:news_app/features/home/components/view_all_component.dart';
 import 'package:news_app/features/home/home_controller.dart';
+import 'package:news_app/features/bookmark/controller/bookmark_controller.dart';
 import 'package:provider/provider.dart';
 
 class TrendingNews extends StatelessWidget {
@@ -128,17 +130,21 @@ class TrendingNews extends StatelessWidget {
                                                               CircleAvatar(
                                                                 backgroundImage:
                                                                     NetworkImage(
-                                                                      item.urlToImage
-                                                                          .toString(),
-                                                                    ),
-                                                                radius: AppSizes.r10,
+                                                                  item.urlToImage
+                                                                      .toString(),
+                                                                ),
+                                                                radius:
+                                                                    AppSizes.r10,
                                                               ),
-                                                              SizedBox(width: AppSizes.pw4),
+                                                              SizedBox(
+                                                                  width: AppSizes
+                                                                      .pw4),
                                                               Expanded(
                                                                 child: Text(
                                                                   item.author ??
                                                                       "Not Found",
-                                                                  style: Theme.of(context)
+                                                                  style: Theme.of(
+                                                                          context)
                                                                       .textTheme
                                                                       .labelSmall!
                                                                       .copyWith(
@@ -153,17 +159,37 @@ class TrendingNews extends StatelessWidget {
                                                           ),
                                                         ),
                                                         Text(
-                                                          item.publishedAt.formatDateTime(),
+                                                          item.publishedAt
+                                                              .formatDateTime(),
                                                           style: Theme.of(context)
                                                               .textTheme
                                                               .labelMedium!
                                                               .copyWith(
-                                                                color: Color(0xFFFFFCFC),
+                                                                color: Color(
+                                                                  0xFFFFFCFC,
+                                                                ),
                                                               ),
                                                         ),
                                                       ],
                                                     ),
                                                   ],
+                                                ),
+                                              ),
+                                              Positioned(
+                                                top: AppSizes.ph8,
+                                                right: AppSizes.pw8,
+                                                child: Consumer<BookmarkController>(
+                                                  builder:
+                                                      (context, controller, _) {
+                                                    final isBookmarked =
+                                                        controller
+                                                            .isBookmarked(item);
+                                                    return CustomBookmarkIconButton(
+                                                      isBookmarked:
+                                                          isBookmarked,
+                                                      onTap: () => controller.toggleBookmark(item),
+                                                    );
+                                                  },
                                                 ),
                                               ),
                                             ],

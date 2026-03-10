@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/constants/app_sizes.dart';
 import 'package:news_app/features/home/categories_screen.dart';
 import 'package:news_app/features/home/components/categories_filter.dart';
 import 'package:news_app/features/home/components/view_all_component.dart';
@@ -17,6 +18,7 @@ class CategoriesList extends StatelessWidget {
             (BuildContext context, HomeController controller, Widget? child) {
               return Column(
                 children: [
+                  SizedBox(height: AppSizes.ph14),
                   ViewAllComponent(
                     title: "Categories",
                     onTap: () {

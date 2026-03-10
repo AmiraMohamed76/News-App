@@ -33,7 +33,7 @@ class SearchScreen extends StatelessWidget {
                           },
                           decoration: InputDecoration(
                             hint: Text(
-                              "Search",
+                              "Search news",
                               style: Theme.of(context).textTheme.labelMedium!
                                   .copyWith(color: Color(0xFFA0A0A0)),
                             ),
@@ -44,21 +44,21 @@ class SearchScreen extends StatelessWidget {
                               ),
                             ),
                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(AppSizes.r4),
+                              borderRadius: BorderRadius.circular(AppSizes.r10),
                               borderSide: BorderSide(
                                 color: Theme.of(context).colorScheme.secondaryContainer,
                                 width: 1,
                               ),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(AppSizes.r4),
+                              borderRadius: BorderRadius.circular(AppSizes.r10),
                               borderSide: BorderSide(
                                 color: Theme.of(context).colorScheme.secondaryContainer,
                                 width: 1,
                               ),
                             ),
                             enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(AppSizes.r4),
+                              borderRadius: BorderRadius.circular(AppSizes.r10),
                               borderSide: BorderSide(
                                 color: Theme.of(context).colorScheme.secondaryContainer,
                                 width: 1,

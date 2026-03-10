@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/core/constants/storage_key.dart';
 import 'package:news_app/core/data_source/local_data/preferences_manager.dart';
+import 'package:news_app/core/services/theme_controller.dart';
 import 'package:news_app/features/auth/login_screen.dart';
 import 'package:news_app/features/navigation/main_screen.dart';
 import 'package:news_app/features/onboarding/onboarding_screen.dart';
@@ -60,9 +61,10 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Image.asset(
-        "assets/images/splash.png",
+        ThemeController.isDark()? "assets/images/dark_splash.png": "assets/images/splash.png",
         width: double.infinity,
         fit: BoxFit.fill,
       ),

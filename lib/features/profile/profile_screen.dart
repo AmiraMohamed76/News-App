@@ -12,6 +12,7 @@ import 'package:news_app/core/widgets/custom_svg_picture.dart';
 import 'package:news_app/features/auth/login_screen.dart';
 import 'package:news_app/features/profile/bottom_sheet/personal_info_bottom_sheet.dart';
 import 'package:news_app/features/profile/controller/profile_controller.dart';
+import 'package:news_app/features/profile/user_repo/user_repository.dart';
 import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -82,7 +83,7 @@ class ProfileScreen extends StatelessWidget {
                           ),
                           SizedBox(height: AppSizes.ph16),
                           Text(
-                            PreferencesManager().getString(StorageKey.userName) ?? "",
+                            controller.userName ?? "User Name",
                             style: Theme.of(context).textTheme.titleSmall!.copyWith(
                               color: Theme.of(context).colorScheme.onPrimary,
                             ),
@@ -140,7 +141,8 @@ class ProfileScreen extends StatelessWidget {
                       "Logout",
                       "assets/images/logout.svg",
                       () async {
-                      //  await PreferencesManager().clear();
+                        // await UserRepository().deleteUser();
+                        // await PreferencesManager().clear();
                         if (!context.mounted) return;
                         Navigator.pushReplacement(
                           context,

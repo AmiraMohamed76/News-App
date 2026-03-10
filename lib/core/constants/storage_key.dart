@@ -9,4 +9,5 @@ class StorageKey {
   static const String countryName = "country_name";
   static const String countryCode = "country_code";
   static const String theme = "theme";
+  static const String bookmarkBox = "bookmark_box";
 }
