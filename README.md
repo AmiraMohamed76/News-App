@@ -1,16 +1,32 @@
-# news_app
+# Newst App
 
-A new Flutter project.
+A Newst App is a mobile application that allows users to stay updated with the latest news from different categories in an easy and organized way. The app provides a clean, responsive interface and personalized features so users can quickly find and save the news that interests them.
 
-## Getting Started
+Key Features
 
-This project is a starting point for a Flutter application.
+1. Onboarding Screens 🚀
+When users open the app for the first time, onboarding screens introduce the main features of the app, such as browsing news, saving articles, and searching by category.
 
-A few resources to get you started if this is your first Flutter project:
+2. User Authentication 🔐
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Login: Users can sign in using their email and password.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Register: New users can create an account to access personalized features like bookmarks and profile management.
+
+3. Home Screen 🏠
+The home screen displays the latest and trending news. Articles are shown in a list or card format with images, titles, and short descriptions.
+
+4. Categories Screen 📂
+Users can browse news based on categories such as Technology, Sports, Business, Health, Entertainment, and Politics.
+
+5. Search Screen 🔎
+A search feature allows users to quickly find news articles by typing keywords or topics.
+
+6. Bookmark Screen ⭐
+Users can save articles they want to read later. Bookmarked news is stored and easily accessible from this screen.
+
+7. Profile Screen 👤
+The profile page shows user information and settings. Users can manage their account, view saved articles, and log out.
+
+8. Responsive Design 📱💻
+The app is fully responsive, ensuring it works smoothly across different screen sizes and devices while maintaining a clean and user-friendly interface.
