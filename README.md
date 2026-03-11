@@ -30,3 +30,6 @@ The profile page shows user information and settings. Users can manage their acc
 
 8. Responsive Design 📱💻
 The app is fully responsive, ensuring it works smoothly across different screen sizes and devices while maintaining a clean and user-friendly interface.
+
+<img width="2490" height="1148" alt="Group 7" src="https://github.com/user-attachments/assets/cf307b40-10c7-4aa9-871a-56d832b1264e" />
+
