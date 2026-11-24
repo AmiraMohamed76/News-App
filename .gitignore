@@ -44,4 +44,4 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-/core/remote_data/api_config
+/core/data_source/remote_data/api_config
