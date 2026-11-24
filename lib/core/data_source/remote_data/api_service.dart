@@ -9,6 +9,7 @@ abstract class BaseApiService{
 
 class ApiService extends BaseApiService {
 
+  @override
   Future<dynamic> get(String endPoint, {Map<String, dynamic>? params}) async {
     final url = Uri.http(ApiConfig.baseUrl, 'v2/$endPoint', {
       'apiKey': ApiConfig.apiKey,
